@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/web3-min-js@1.0.0/web3.min.js"></script>
+    <script language="javascript" type="text/javascript" src="abi.js"></script>
+    <title>Vaquinha Eth</title>
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Vaquinha Etherum</h1>
+            <p class="lead">Crie sua causa e conte com a ajuda da comunidade para que você consiga atingir a sua meta!
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" id="card">
+
+        </div>
+        <br>
+        <button type="button" data-toggle="modal" data-target="#exampleModal"
+            class="btn btn-secondary btn-lg btn-block">Criar minha causa</button>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Criar nova causa</h5>
+                    <button type="button" id="loadvacas" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Seu endereço</label>
+                            <input type="text" class="form-control" id="addressForm" readonly>
+                            <small id="emailHelp" class="form-text text-muted">Confirme se o endereço a ser solicitado
+                                será esse mesmo!</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Deixe uma breve descrição da sua causa</label>
+                            <textarea class="form-control" id="descriptionForm" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Quantidade a ser arrecadada</label>
+                            <input type="number" value="0" class="form-control" id="coinsForm">
+                            <small id="emailHelp" class="form-text text-muted">Valor está contabilizado em
+                                ETH</small>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkDestaq">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Destacar Vaquinha ?
+                            </label>
+                            <small id="emailHelp" class="form-text text-muted">Ao selecionar essa opção você cede 10% do
+                                valor arrecadado para o contrato da vaquinha e ganhará destaque em nosso site!</small>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="buttonCancelCow" class="btn btn-secondary"
+                        data-dismiss="modal">Fechar</button>
+                    <button type="button" id="buttonCreateCow" class="btn btn-primary">Criar Causa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalDonate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Doar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="valueDonate">Valor que deseja doar</label>
+                            <input type="number" class="form-control" id="valueDonate"></input>
+                            <small id="emailHelp" class="form-text text-muted">Esse valor sera em ether!</small>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary btn-donate">Doar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+
+        var cow;
+        var userAccount;
+        var acc;
+        var vaquinhaSelected;
+
+        function startApp() {
+            var cowAddress = "0xbe71eba2b3561fDb1C9F88761b1BD85A3e673805";
+            cow = new web3.eth.Contract(abi, cowAddress);
+            var cont = 0;
+
+            var accountInterval = setInterval(function () {
+
+                web3.eth.getAccounts().then(function (result) {
+                    acc = result[0];
+                })
+
+                if (acc !== userAccount) {
+                    userAccount = acc;
+                    setAddress();
+                    listarVaquinhas();
+                }
+                
+            }, 100);
+
+
+        }
+
+        function setAddress() {
+            $('#addressForm').val(userAccount);
+        }
+
+        $('#buttonCreateCow').click(function () {
+            createCow();
+        })
+
+        function createCow() {
+            var value = $('#coinsForm').val();
+            var description = $('#descriptionForm').val();
+            var destaq = false;
+            if ($('#checkDestaq').is(":checked")) {
+                destaq = true;
+            }
+
+            cow.methods.criarVaquinha(value, destaq, description).send({ from: userAccount, gas: 200000, gasPriceInWei: 1000 }).then(refreshData => {
+                console.log(refreshData);
+                swal("Quem bom!", "Você acabou de criar uma nova vaquinha", "success");
+                $('#exampleModal').modal('hide');
+                listarVaquinhas();
+            });
+
+            return false;
+
+            // barrel program behave cheese more wrong indicate noise local brick great kidney
+        }
+
+        function pegarVaquinhas() {
+            return cow.methods.pegarVaquinhas().call();
+        }
+
+        function listarVaquinhas() {
+            var vaquinhas = []
+            var obj = {}
+            var html = ''
+
+            pegarVaquinhas().then(data => {
+                console.log(data);
+
+                for (let index = 0; index < data[0].length; index++) {
+                    obj = {}
+
+                    obj.endereco = data[0][index]
+                    obj.meta = data[1][index]
+                    obj.saldo = data[2][index]
+                    obj.descricao = data[3][index]
+                    obj.destaque = data[4][index]
+                    obj.ativo = data[5][index]
+
+                    vaquinhas.push(obj);
+                }
+
+                console.log(vaquinhas);
+                var cont = 0
+                vaquinhas.forEach(element => {
+
+                    var porcentagem = 0;
+
+                    porcentagem = ((element.saldo/1000000000000000000) / (element.meta/1000000000000000000)) * 100;
+                    porcentagem = Math.round(porcentagem)
+                    
+                    if (element.ativo) {
+                        html += '<div class="col-4">'
+                    } else {
+                        html += '<div class="col-4" style="display:none">'
+                    }
+                    html += '<div class="card" style="width: 18rem;">'
+
+                    if (element.destaque) {
+                        html += '<span class="badge badge-pill badge-warning">Destaque</span>'
+                    }
+                    html += '<img src="coin.png" class="card-img-top" alt="coin">'
+                    html += '<div class="card-body">'
+                    html += '<h5 class="card-title">Ajude essa causa</h5>'
+                    html += '<p class="card-text">' + element.descricao + '</p>'
+                    html += '<p class="card-text">META: ' + element.meta / 1000000000000000000 + ' ETH</p>'
+                    html += '<p class="card-text">Arrecadado: ' + element.saldo / 1000000000000000000 + ' ETH</p>'
+                    html += '<div class="progress"><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: '+porcentagem+'%"></div></div><br>'
+
+                    if(userAccount == element.endereco){
+                        
+                        html += '<a href="#" class="btn btn-primary btn-doar" data-toggle="modal" data-target="#modalDonate" data-id="' + cont + '" >Doar</a><a style="margin-left:10px" href="#" class="btn btn-danger btn-sacar"  data-id="' + cont + '" >Sacar</a></div></div></div>'
+                    }else{
+
+                        html += '<a href="#" class="btn btn-primary btn-doar" data-toggle="modal" data-target="#modalDonate" data-id="' + cont + '" >Doar</a></div></div></div>'
+                    }
+
+                    cont++
+                });
+
+                $("#card").html(html)
+
+                $('.btn-doar').click(function () {
+                    vaquinhaSelected = $(this).data('id')
+                })
+
+                $('.btn-donate').click(function () {
+                    
+                    let valor = $('#valueDonate').val()
+                    
+
+                    cow.methods.atualizarSaldoVaquinha(vaquinhaSelected).send({ from: userAccount, value: valor * 1000000000000000000 }).then(data => {
+                        
+                        swal("Quem bom!", "Você acabou de doar para uma vaquinha!", "success");
+                        listarVaquinhas();
+                    });
+                })
+
+                $('.btn-sacar').click(function(){
+                   
+                    var id = $(this).data('id')
+
+                    cow.methods.sacarVaquinha(id).send({ from: userAccount }).then(data => {
+                        
+                        swal("Quem bom!", "Você acabou de Sacar a sua vaquinha!", "success");
+                        listarVaquinhas();
+                    });
+                })
+
+            })
+
+        }
+
+        // Padrão para detectar um web3 injetado.
+        window.addEventListener('load', function () {
+
+            web3Provider = null;
+            // Modern dapp browsers...
+            if (window.ethereum) {
+                web3Provider = window.ethereum;
+                try {
+                    // Request account access
+                    window.ethereum.enable();
+                } catch (error) {
+                    // User denied account access...
+                    console.error("User denied account access")
+                }
+            }
+            // Legacy dapp browsers...
+            else if (window.web3) {
+                web3Provider = window.web3.currentProvider;
+            }
+            // If no injected web3 instance is detected, fall back to Ganache
+            else {
+                console.log('No web3? You should consider trying MetaMask!')
+                web3Provider = new Web3.providers.HttpProvider('http://localhost:9545');
+            }
+            web3 = new Web3(web3Provider);
+            startApp();
+            
+            console.log(web3);
+
+        })
+    </script>
+</body>
+
+</html>
